@@ -1,0 +1,12 @@
+<root BTCPP_format="3">
+	<BehaviorTree ID="MainTree">
+		<Sequence name="root_sequence">
+			<!-- reads the input message from a static string -->
+			<SaySomething message="hello"/>
+			<!-- writes something into the entry of the blackboard called the_answer -->
+			<ThinkWhatToSay text="{the_answer}"/>
+			<!-- read the input message from an entry in the blackboard called the_answer -->
+			<SaySomething message="{the_answer}"/>
+		</Sequence>
+	</BehaviorTree>
+</root>
