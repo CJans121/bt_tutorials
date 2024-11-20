@@ -1,0 +1,14 @@
+<root BTCPP_format="4">
+	<BehaviorTree ID="MainTree">
+		<Sequence name="root">
+			<!-- Store a value of Position2D in the entry GoalPosition -->
+			<CalculateGoal goal="{GoalPosition}"/>
+			<!-- Call PrintTarget with the input "target" read from the Blackboard entry GoalPosition -->
+			<PrintTarget target="{GoalPosition}"/>
+			<!-- Using the built-in action Script to assign the string "-1;3" to the key OtherGoal -->
+			<Script code="OtherGoal:='-1;3'"/>
+			<!-- Call PrintTarget again with the input "target" read from the entry OtherGoal -->
+			<PrintTarget target="{OtherGoal}"/>
+		</Sequence>
+</BehaviorTree>
+</root>
