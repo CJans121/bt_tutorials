@@ -1,0 +1,17 @@
+ <root BTCPP_format="4" >
+	<BehaviorTree>
+		<ReactiveSequence>
+			<!-- Check if battery is OK. Prints OK and returns success as implemented in the CheckBattery function -->
+			<BatteryOK/>
+			<Sequence>
+				<!-- read the input message from a static string and print it -->
+				<SaySomething message="mission started..."/>
+				<!-- execute the MoveBase onStart function with Pose2D {1,2,3} and then constantly call onRunning -->
+				<MoveBase goal="1;2;3"/>
+				<!-- read the input message from a static string and print it -->
+				<SaySomething message="mission completed!"/>
+				<!-- because this is reactive sequence, the enclosed sequence is restarted and BatteryOK is ran each time. if BatteryOK returns FAILURE MoveBase would be halted -->
+			</Sequence>
+		</ReactiveSequence>
+	</BehaviorTree>
+</root>

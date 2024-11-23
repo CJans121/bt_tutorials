@@ -19,7 +19,7 @@ include_directories(
 set(ROS_COMMON_DEPENDENCIES rclcpp behaviortree_cpp)
 
 # Define libraries
-set(PROJECT_LIBRARIES your_first_behavior_tree blackboard_and_ports ports_with_generic_types)
+set(PROJECT_LIBRARIES your_first_behavior_tree blackboard_and_ports ports_with_generic_types reactive_behaviors)
 
 # Create and link libraries and executables
 set(PROJECT_NODES)
@@ -35,7 +35,8 @@ foreach(LIBRARY ${PROJECT_LIBRARIES})
   # Link
   ament_target_dependencies(${LIBRARY} ${ROS_COMMON_DEPENDENCIES})
   ament_target_dependencies(${NODE} ${ROS_COMMON_DEPENDENCIES})
-  target_link_libraries(${NODE} ${LIBRARY})
+  # target_link_libraries(${NODE} ${LIBRARY})
+  target_link_libraries(${NODE} ${PROJECT_LIBRARIES})
 endforeach()
 
 # Install include directories
