@@ -16,6 +16,9 @@ int main()
     std::cout << "\nPrinting tree:";
     BT::printTreeRecursively(tree.rootNode());
 
+    // Setting the RetryUntilSuccessful num_attempts in the tree XML to 3 or more ensures that the picking lock strategy
+    // succeeds in opening the door. Otherwise, the fallback strategy of smashing the door is used.
+
     std::cout << "\nTicking tree:";
     tree.tickWhileRunning();
 

@@ -16,7 +16,7 @@
 		<Fallback>
 			<!-- try opening door -->
 			<OpenDoor/>
-			<!-- if the door is not open, try pick it num_attempts times -->
+			<!-- if the door is not open, try picking it num_attempts times. 3 or more to succeed -->
 			<RetryUntilSuccessful num_attempts="2">
 				<PickLock/>
 			</RetryUntilSuccessful>
