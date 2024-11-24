@@ -1,0 +1,27 @@
+<root BTCPP_format="4">
+	<BehaviorTree ID="MainTree">
+		<Sequence>
+			<Fallback>
+				<Inverter>
+					<!-- if the door is closed, fallback to the subtree, i.e. IsDoorClosed returns SUCCESS which is inverted to FAILURE, prompting the fallback tree to tick -->
+					<IsDoorClosed/>
+				</Inverter>
+				<SubTree ID="DoorClosed"/>
+			</Fallback>
+			<!-- if the subtree strategies succeed, then door is open, pass through it -->
+			<PassThroughDoor/>
+		</Sequence>
+	</BehaviorTree>
+	<BehaviorTree ID="DoorClosed">
+		<Fallback>
+			<!-- try opening door -->
+			<OpenDoor/>
+			<!-- if the door is not open, try pick it num_attempts times -->
+			<RetryUntilSuccessful num_attempts="2">
+				<PickLock/>
+			</RetryUntilSuccessful>
+			<!-- if pick lock failed, smash door -->
+			<SmashDoor/>
+		</Fallback>
+	</BehaviorTree>
+</root>
