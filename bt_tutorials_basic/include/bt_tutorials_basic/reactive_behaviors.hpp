@@ -1,5 +1,5 @@
-#ifndef PORTS_WITH_GENERIC_TYPES
-#define PORTS_WITH_GENERIC_TYPES
+#ifndef REACTIVE_BEHAVIORS
+#define REACTIVE_BEHAVIORS
 
 #include <behaviortree_cpp/action_node.h>
 #include <chrono>
