@@ -1,0 +1,16 @@
+<root BTCPP_format="4">
+	<!-- Include the XML data for subtree A -->
+	<include path="./use_multiple_xml_files/subtree_A.xml" />
+	<!-- Include the XML data for subtree B -->
+	<include path="./use_multiple_xml_files/subtree_B.xml" />
+	<BehaviorTree ID="MainTreeInclude">
+		<Sequence>
+			<!-- Print the message using the custom action node SaySomething -->
+			<SaySomething message="starting MainTreeInclude" />
+			<!-- Invoke subtree A -->
+			<SubTree ID="SubTreeA" />
+			<!-- Invoke subtree B -->
+			<SubTree ID="SubTreeB" />
+		</Sequence>
+	</BehaviorTree>
+</root>

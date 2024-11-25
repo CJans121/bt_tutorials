@@ -1,0 +1,12 @@
+<root BTCPP_format="4">
+	<BehaviorTree ID="MainTree">
+		<Sequence>
+			<!-- Print the message using the custom action node SaySomething -->
+			<SaySomething message="starting MainTree" />
+			<!-- Invoke subtree A -->
+			<SubTree ID="SubTreeA" />
+			<!-- Invoke subtree B -->
+			<SubTree ID="SubTreeB" />
+		</Sequence>
+	</BehaviorTree>
+</root>
