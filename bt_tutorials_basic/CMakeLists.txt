@@ -21,21 +21,31 @@ set(ROS_COMMON_DEPENDENCIES rclcpp behaviortree_cpp)
 # Define libraries
 set(PROJECT_LIBRARIES your_first_behavior_tree blackboard_and_ports ports_with_generic_types reactive_behaviors using_subtrees)
 
-# Create and link libraries and executables
+# Create libraries and link against ROS dependencies
 set(PROJECT_NODES)
 foreach(LIBRARY ${PROJECT_LIBRARIES})
   # Store node names
-  set(NODE ${LIBRARY}_node)
-  list(APPEND PROJECT_NODES ${NODE})
+  list(APPEND PROJECT_NODES ${LIBRARY}_node)
 
-  # Create libraries and executables
+  # Create libraries
   add_library(${LIBRARY} src/${PROJECT_NAME}/${LIBRARY}.cpp)
+
+  # Link against ROS dependencies
+  ament_target_dependencies(${LIBRARY} ${ROS_COMMON_DEPENDENCIES})
+endforeach()
+
+# Manually add nodes not matching above pattern
+list (APPEND PROJECT_NODES port_remapping_node)
+
+# Create node executables and link libraries against them
+foreach(NODE ${PROJECT_NODES})
+  # Create node executable
   add_executable(${NODE} src/${NODE}.cpp)
 
-  # Link
-  ament_target_dependencies(${LIBRARY} ${ROS_COMMON_DEPENDENCIES})
+  # Link against ROS dependencies
   ament_target_dependencies(${NODE} ${ROS_COMMON_DEPENDENCIES})
-  # target_link_libraries(${NODE} ${LIBRARY})
+
+  # Link against non-ROS dependencies
   target_link_libraries(${NODE} ${PROJECT_LIBRARIES})
 endforeach()
 

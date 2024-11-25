@@ -1,0 +1,36 @@
+<root BTCPP_format="4">
+        <BehaviorTree ID="MainTree">
+                <Sequence>
+                        <!-- Set the 'move_goal' blackboard key to the string "1;2;3".
+                             This key is later used as the target for the MoveBase action. -->
+                        <Script code=" move_goal='1;2;3' "/>
+
+                        <!-- Invoke the 'MoveRobot' subtree.
+                             The 'move_goal' key is remapped to the subtree's 'target' input,
+                             and the subtree's output 'result' is remapped to 'move_result'. -->
+                        <SubTree ID="MoveRobot" target="{move_goal}" result="{move_result}"/>
+
+                        <!-- Print the value of 'move_result' obtained from the subtree execution.
+                             'SaySomething' is a simple action node that outputs messages. -->
+                        <SaySomething message="{move_result}"/>
+                </Sequence>
+        </BehaviorTree>
+
+        <BehaviorTree ID="MoveRobot">
+                <Fallback>
+                        <Sequence>
+                                <!-- Attempt to move the robot to the specified target. -->
+                                <MoveBase goal="{target}"/>
+
+                                <!-- If the MoveBase action succeeds, set 'result' to 'goal reached'. -->
+                                <Script code=" result:='goal reached' "/>
+                        </Sequence>
+
+                        <ForceFailure>
+                                <!-- Ensure the Fallback continues by forcing failure.
+                                     Set 'result' to 'error' in case MoveBase fails. -->
+                                <Script code=" result:='error' "/>
+                        </ForceFailure>
+                </Fallback>
+        </BehaviorTree>
+</root>
