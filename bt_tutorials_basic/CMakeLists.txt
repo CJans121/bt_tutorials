@@ -19,7 +19,7 @@ include_directories(
 set(ROS_COMMON_DEPENDENCIES rclcpp behaviortree_cpp)
 
 # Define libraries
-set(PROJECT_LIBRARIES your_first_behavior_tree blackboard_and_ports ports_with_generic_types reactive_behaviors using_subtrees)
+set(PROJECT_LIBRARIES your_first_behavior_tree blackboard_and_ports ports_with_generic_types reactive_behaviors using_subtrees pass_additional_arguments)
 
 # Create libraries and link against ROS dependencies
 set(PROJECT_NODES)

@@ -1,0 +1,10 @@
+<root BTCPP_format="4">
+	<BehaviorTree IT="MainTree">
+		<Sequence>
+			<!-- Each node prints passed args when ticked -->
+			<Action_A/>
+			<Action_B name = "Action_B_1"/>
+			<Action_B name = "Action_B_2"/>
+		</Sequence>
+	</BehaviorTree>
+</root>
