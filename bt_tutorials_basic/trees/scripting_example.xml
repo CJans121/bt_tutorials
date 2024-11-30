@@ -1,0 +1,29 @@
+<root BTCPP_format="4">
+    <BehaviorTree ID="MainTree">
+        <Sequence>
+            <!-- Script: Sets the variable 'msg' to the value 'hello world' -->
+            <Script code=" msg:='hello world' " />
+
+            <!-- Script: Sets multiple variables with specific values -->
+            <Script code=" A:=THE_ANSWER; B:=3.14; color:=RED " />
+
+            <!-- Precondition: Evaluates the condition (A > B && color != BLUE) -->
+            <!-- If true, runs the 'Sequence' child node; if false, returns FAILURE -->
+            <Precondition if="A>B && color != BLUE" else="FAILURE">
+                <Sequence>
+                    <!-- SaySomething: Prints the integer value of enum variable A -->
+                    <SaySomething message="{A}" />
+
+                    <!-- SaySomething: Prints the value of variable B -->
+                    <SaySomething message="{B}" />
+
+                    <!-- SaySomething: Prints the value of variable msg -->
+                    <SaySomething message="{msg}" />
+
+                    <!-- SaySomething: Prints the integer value of enum variable color -->
+                    <SaySomething message="{color}" />
+                </Sequence>
+            </Precondition>
+        </Sequence>
+    </BehaviorTree>
+</root>
