@@ -35,7 +35,7 @@ foreach(LIBRARY ${PROJECT_LIBRARIES})
 endforeach()
 
 # Manually add nodes not matching above pattern
-list (APPEND PROJECT_NODES port_remapping_node use_multiple_xml_files_node scripting_example_node)
+list (APPEND PROJECT_NODES port_remapping_node use_multiple_xml_files_node scripting_example_node loggers_and_observer_node)
 
 # Create node executables and link libraries against them
 foreach(NODE ${PROJECT_NODES})

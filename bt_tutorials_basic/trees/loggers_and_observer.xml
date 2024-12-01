@@ -1,0 +1,31 @@
+<root BTCPP_format="4">
+	<BehaviorTree ID="MainTree">
+		<Sequence>
+			<Fallback>
+				<!-- Always fails, so moves on to the subtree -->
+				<AlwaysFailure name="failing_action"/>
+				<!-- The subtree is designed to always succeed -->
+				<SubTree ID="SubTreeA" name="mysub"/>
+			</Fallback>
+			<!-- Since the subtree always succeeds, the last action will always be executed and return success -->
+			<AlwaysSuccess name="last_action"/>
+		</Sequence>
+	</BehaviorTree>
+
+	<!-- SubTreeA contains another sequence of actions -->
+	<BehaviorTree ID="SubTreeA">
+		<Sequence>
+			<!-- Always succeeds, so moves on to the next action -->
+			<AlwaysSuccess name="action_subA"/>
+			<!-- This subtree always succeeds -->
+			<SubTree ID="SubTreeB" name="sub_nested"/>
+			<!-- This subtree also always succeeds -->
+			<SubTree ID="SubTreeB"/>
+		</Sequence>
+	</BehaviorTree>
+
+	<!-- SubTreeB always returns success -->
+	<BehaviorTree ID="SubTreeB">
+		<AlwaysSuccess name="action_subB"/>
+	</BehaviorTree>
+</root>
