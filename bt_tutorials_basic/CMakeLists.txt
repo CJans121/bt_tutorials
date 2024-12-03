@@ -9,17 +9,20 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(behaviortree_cpp REQUIRED)
+find_package(behaviortree_ros2 REQUIRED)
+find_package(action_tutorials_interfaces REQUIRED)
+find_package(rclcpp_action REQUIRED)
 
 # Include directories
 include_directories(
   include
 )
 
-# Define common ROS dependencies
-set(ROS_COMMON_DEPENDENCIES rclcpp behaviortree_cpp)
+# Define common ROS dependencies -- For convenience we'll link these against all targets, although for most of them they are not needed
+set(ROS_COMMON_DEPENDENCIES rclcpp behaviortree_cpp rclcpp_action action_tutorials_interfaces behaviortree_ros2)
 
 # Define libraries
-set(PROJECT_LIBRARIES your_first_behavior_tree blackboard_and_ports ports_with_generic_types reactive_behaviors using_subtrees pass_additional_arguments)
+set(PROJECT_LIBRARIES your_first_behavior_tree blackboard_and_ports ports_with_generic_types reactive_behaviors using_subtrees pass_additional_arguments integration_with_ros2)
 
 # Create libraries and link against ROS dependencies
 set(PROJECT_NODES)
@@ -35,7 +38,7 @@ foreach(LIBRARY ${PROJECT_LIBRARIES})
 endforeach()
 
 # Manually add nodes not matching above pattern
-list (APPEND PROJECT_NODES port_remapping_node use_multiple_xml_files_node scripting_example_node loggers_and_observer_node)
+list (APPEND PROJECT_NODES port_remapping_node use_multiple_xml_files_node scripting_example_node loggers_and_observer_node )
 
 # Create node executables and link libraries against them
 foreach(NODE ${PROJECT_NODES})

@@ -1,5 +1,6 @@
 #ifndef INTEGRATION_WITH_ROS2
 #define INTEGRATION_WITH_ROS2
+#include "action_tutorials_interfaces/action/fibonacci.hpp"
 #include <behaviortree_ros2/bt_action_node.hpp>
 
 namespace integration_with_ros2
@@ -9,6 +10,7 @@ class FibonacciAction : public BT::RosActionNode<Fibonacci>
 {
   public:
     using GoalHandleFibonacci = rclcpp_action::ServerGoalHandle<Fibonacci>;
+
     FibonacciAction(const std::string &name, const BT::NodeConfig &conf, const BT::RosNodeParams &params);
 
     /**
@@ -26,7 +28,7 @@ class FibonacciAction : public BT::RosActionNode<Fibonacci>
      * @brief Callback executed when a reply is received. Based on the reply, you may decide to return SUCCESS or
      * FAILURE
      */
-    BT::NodeStatus onResultReceived(const BT::WrappedResult &wr) override;
+    BT::NodeStatus onResultReceived(const WrappedResult &wr) override;
 
     /**
      * @brief Callback invoked when there is communication error between the action client and the server. Sets the
@@ -39,7 +41,10 @@ class FibonacciAction : public BT::RosActionNode<Fibonacci>
      * the feedback whether to abort the action, or consider the TreeNode completed. In that case, return SUCCESS or
      * FAILURE. The cancel request is automatically sent to the server.
      */
-    BT::NodeStatus onFeedback(const std::shared_ptr<const BT::Feedback> feedback);
+    BT::NodeStatus onFeedback(const std::shared_ptr<const Feedback> feedback);
+
+  private:
+    std::shared_ptr<rclcpp::Node> shared_node_;
 };
 
 } // namespace integration_with_ros2
