@@ -12,6 +12,8 @@ find_package(behaviortree_cpp REQUIRED)
 find_package(behaviortree_ros2 REQUIRED)
 find_package(action_tutorials_interfaces REQUIRED)
 find_package(rclcpp_action REQUIRED)
+find_package(example_interfaces REQUIRED)
+
 
 # Include directories
 include_directories(
@@ -19,7 +21,7 @@ include_directories(
 )
 
 # Define common ROS dependencies -- For convenience we'll link these against all targets, although for most of them they are not needed
-set(ROS_COMMON_DEPENDENCIES rclcpp behaviortree_cpp rclcpp_action action_tutorials_interfaces behaviortree_ros2)
+set(ROS_COMMON_DEPENDENCIES rclcpp behaviortree_cpp rclcpp_action action_tutorials_interfaces behaviortree_ros2 example_interfaces)
 
 # Define libraries
 set(PROJECT_LIBRARIES your_first_behavior_tree blackboard_and_ports ports_with_generic_types reactive_behaviors using_subtrees pass_additional_arguments integration_with_ros2)
