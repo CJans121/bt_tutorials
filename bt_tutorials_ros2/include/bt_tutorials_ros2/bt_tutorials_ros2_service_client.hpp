@@ -1,3 +1,17 @@
+/**
+ * @file bt_tutorials_ros2_service_client.hpp
+ * @brief Header file for the AddTwoIntsNode, a custom BehaviorTree node for interacting with the official ROS 2
+ * "/add_two_ints" service.
+ *
+ * @author Janak Panthi (Crasun Jans)
+ *
+ * @details Implements the AddTwoInts service client tutorial from the "Integration with ROS2" section on the
+ * official BehaviorTree.CPP website. This node interacts with a ROS 2 service server to send two integers as a
+ * request and processes the resulting sum.
+ *
+ * @license MIT
+ */
+
 #ifndef BT_TUTORIALS_ROS2_SERVICE_CLIENT_HPP
 #define BT_TUTORIALS_ROS2_SERVICE_CLIENT_HPP
 

@@ -1,3 +1,17 @@
+/**
+ * @file bt_tutorials_ros2_action_client.hpp
+ * @brief Header file for the FibonacciActionNode, a custom BehaviorTree node for interacting with the official ROS 2
+ * "/fibonacci" action server.
+ *
+ * @author Janak Panthi (Crasun Jans)
+ *
+ * @details Implements the Fibonacci action client tutorial from the "Integration with ROS2" section on the
+ * official BehaviorTree.CPP website. This node sends goals to a Fibonacci action server, processes its feedback,
+ * and handles the result.
+ *
+ * @license MIT
+ */
+
 #ifndef BT_TUTORIALS_ROS2_ACTION_CLIENT_HPP
 #define BT_TUTORIALS_ROS2_ACTION_CLIENT_HPP
 
