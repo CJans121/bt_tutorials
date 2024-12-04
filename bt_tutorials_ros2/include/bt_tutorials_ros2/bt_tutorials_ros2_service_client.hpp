@@ -1,46 +1,86 @@
 #ifndef BT_TUTORIALS_ROS2_SERVICE_CLIENT_HPP
 #define BT_TUTORIALS_ROS2_SERVICE_CLIENT_HPP
 
-#include <behaviortree_cpp/action_node.h>
-#include <behaviortree_ros2/bt_service_node.hpp>
-#include <example_interfaces/srv/add_two_ints.hpp>
-#include <string>
+#include <behaviortree_cpp/action_node.h>          // Base class for action nodes in BehaviorTreeCpp.
+#include <behaviortree_ros2/bt_service_node.hpp>   // BT wrapper for ROS2 service nodes.
+#include <example_interfaces/srv/add_two_ints.hpp> // Service definition for AddTwoInts service.
+#include <string>                                  // For handling string types.
 
 namespace bt_tutorials_ros2_service_client
 {
+// Alias for the AddTwoInts service type.
 using AddTwoInts = example_interfaces::srv::AddTwoInts;
+
+/**
+ * @brief Class representing a custom service node for the AddTwoInts service in a BehaviorTree.
+ *
+ * This class derives from the `RosServiceNode` provided by the `behaviortree_ros2` library.
+ * It implements all necessary callbacks and methods to interact with a service server
+ * to perform the AddTwoInts service call.
+ */
 class AddTwoIntsNode : public BT::RosServiceNode<AddTwoInts>
 {
   public:
+    /**
+     * @brief Constructor for the AddTwoIntsNode.
+     *
+     * Initializes the service node with the given name, configuration, and ROS node parameters.
+     * This allows the service node to communicate with the ROS 2 system and the service server.
+     *
+     * @param name The name of the node in the behavior tree.
+     * @param conf The configuration parameters for the behavior tree node.
+     * @param params ROS node parameters used to configure the service node.
+     */
     AddTwoIntsNode(const std::string &name, const BT::NodeConfig &conf, const BT::RosNodeParams &params);
 
     /**
-     * @brief Merge the ports of this Derived class with the ports of the base class using
-     * RosServiceNode::providedBasicPorts(). See implementation of this function.
+     * @brief Provides the ports required by this service node.
+     *
+     * This static function defines the input and output ports for the node, merging the
+     * base class ports with any additional ones specific to this derived class.
+     *
+     * @return A list of ports this service node provides.
      */
     static BT::PortsList providedPorts();
 
     /**
-     * @brief Called when the TreeNode is ticked and should send the request to the service server
-     * @return
+     * @brief Sends a request to the service server when the tree node is ticked.
+     *
+     * This function is called when the behavior tree ticks the node. It sends the request to the
+     * service server.
+     *
+     * @param request The request to be sent to the service server.
+     * @return True if the request was successfully set, otherwise false.
      */
     bool setRequest(Request::SharedPtr &request) override;
 
     /**
-     * @brief Callback invoked when a response is received from the server. Must return SUCCESS or FAILURE.
+     * @brief Callback executed when a response is received from the service server.
+     *
+     * This function is invoked when the service server sends a response. Based on the response,
+     * it will return either `SUCCESS` or `FAILURE` to indicate the outcome of the service call.
+     *
+     * @param response The response received from the service server.
+     * @return The status of the node after processing the response.
      */
     BT::NodeStatus onResponseReceived(const Response::SharedPtr &response) override;
 
     /**
-     * @brief Callack invoked when there is communication error between the service client and server. Sets the status
-     * of the TreeNode to either SUCCESS or FAILURE depending on the return value. Note that if not overriden, returns
-     * FAILURE by default.
+     * @brief Callback invoked when the service client encounters a communication failure.
+     *
+     * This callback handles failure cases where the communication between the service client
+     * and the server fails. The node status is updated to either `SUCCESS` or `FAILURE` based on
+     * the error received.
+     *
+     * @param error The error code indicating the failure reason.
+     * @return The status of the node after handling the failure.
      */
     BT::NodeStatus onFailure(BT::ServiceNodeErrorCode error) override;
 
   private:
-    std::shared_ptr<rclcpp::Node> shared_node_;
+    std::shared_ptr<rclcpp::Node> shared_node_; // Shared pointer to the ROS node for logging and other tasks.
 };
 
 } // namespace bt_tutorials_ros2_service_client
-#endif
+
+#endif // BT_TUTORIALS_ROS2_SERVICE_CLIENT_HPP
